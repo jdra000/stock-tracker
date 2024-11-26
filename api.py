@@ -1,3 +1,5 @@
+### Alpha Vantage API ###
+
 from dotenv import load_dotenv
 import os
 
@@ -52,14 +54,14 @@ class API:
                 # Task: fetch daily data
                 async with asyncio.TaskGroup() as tg:
                     tasks = {stock: tg.create_task(self.fetch_daily(session, stock)) for stock in self.stocks}
-                results = {stock: {'open_values':task.result()[0], 'closed_values':task.result()[1]} for stock, task in tasks.items()}
+                results = {stock: {'open_values':task.result()[0], 'close_values':task.result()[1]} for stock, task in tasks.items()}
                 if results:
                     print('--------------------------- DAILY DATA LOADED ---------------------------')
 
                 # Task: fetch weekly data
                 async with asyncio.TaskGroup() as tg:
                     tasks = {stock: tg.create_task(self.fetch_weekly(session, stock)) for stock in self.stocks}
-                results = {stock: {'open_values': task.result()[0], 'closed_values':task.result()[1]} for stock, task in tasks.items()}
+                results = {stock: {'open_values': task.result()[0], 'close_values':task.result()[1]} for stock, task in tasks.items()}
                 if results:
                     print('--------------------------- WEEKLY DATA LOADED ---------------------------')
         except Exception as e:
