@@ -1,1 +1,3 @@
-# stock-tracker
+Stock Tracker CLI application V1
+
+
